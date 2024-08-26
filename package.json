@@ -1,5 +1,5 @@
 {
-  "name": "RPLDanger-Bot",
+  "name": "rpldanger-bot",
   "version": "1.0.0",
   "description": "Discord bot for RPL Danger class",
   "main": "index.js",
