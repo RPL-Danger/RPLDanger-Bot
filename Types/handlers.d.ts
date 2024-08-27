@@ -2,7 +2,7 @@ import { ClientEvents, Client, SlashCommandBuilder, Collection } from "discord.j
 export interface IEvent {
     name: keyof ClientEvents,
     once: Boolean,
-    execute: Function;
+    execute: Function
 }
 
 export interface ICommands {
@@ -10,6 +10,7 @@ export interface ICommands {
     execute: Function
 }
 
-export interface IClientCommand extends Client {
-    commands: Collection
+export interface IFeatures {
+    load: Function
 }
+
