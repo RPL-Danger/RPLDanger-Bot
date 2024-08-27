@@ -1,6 +1,6 @@
 import { join } from "path"
 import { readdirSync } from "fs"
-import { Client, Collection, Interaction, SlashCommandBuilder, REST, Routes, RESTPostAPIApplicationGuildCommandsJSONBody } from "discord.js"
+import { Client, Collection, REST, Routes, RESTPostAPIApplicationGuildCommandsJSONBody } from "discord.js"
 import { ICommands } from "../Types"
 
 declare module "discord.js" {
