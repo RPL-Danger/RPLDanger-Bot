@@ -1,23 +1,40 @@
 import { schedule } from "node-cron"
 import { Client } from "discord.js"
-import { igApi, getCookie } from "insta-fetcher"
+import Instagram from "../Utils/instagram";
+
+declare module "instagram-private-api" {
+    interface IgApiClient {
+        mrWantoId: number;
+    }
+}
 
 declare module "discord.js" {
-    export interface Client {
-        instagram: igApi;
+    interface Client {
+        instagram: Instagram;
     }
 }
 
 export default {
     /* Cek Instagram pak wanto setiap 5 menit */
     load: async (client: Client) => {
-        const cookie = await getCookie(process.env.INSTAGRAM_USERNAME!, process.env.INSTAGRAM_PASSWORD!)
-        const ig = new igApi(cookie.toString())
-        client.instagram = ig;
+        client.instagram = new Instagram();
+        const ig: Instagram = client.instagram
+        await ig.login();
+        const mrWanto = await ig.user.search("mraihanaf")
+        ig.mrWantoId = mrWanto.users[0].pk
+
+        const post = await ig.getPosts(ig.mrWantoId)
+        console.log(post)
+        console.log(mrWanto)
         schedule("*/5 * * * *", async() => {
             console.log("Checking Mr. Wanto Instagram")
-            const res = await ig.fetchUserPostsV2('wantoariwibowo')
-            console.log(res.count)
+            try {
+                const post = await ig.getPosts(ig.mrWantoId)
+            } catch (err) {
+                // relogin
+                client.instagram = new Instagram()
+                await client.instagram.login()
+            }
         })
     }
 }
