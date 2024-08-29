@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, AttachmentBuilder } from "discord.js";
+import { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
 export default {
     data: new SlashCommandBuilder()
           .setName("mrwantofetch")
@@ -7,6 +7,17 @@ export default {
         const ig = interaction.client.instagram
         const latestPost = await ig.getLatestPost(ig.mrWantoId)
         const postUrl: string = `https://instagram.com/p/${latestPost.code}`
-        await interaction.reply(postUrl)
+        const mediaUrl = latestPost.image_versions2.candidates[0].url
+        const embed = new EmbedBuilder()
+        .setColor(0x0099FF)
+        .setTitle(postUrl)
+        .setDescription(latestPost.caption?.text ? latestPost.caption.text : "No Caption")
+        .setAuthor({name:"@wantoariwibowo"})
+        .addFields(
+            { name: 'Likes', value: latestPost.like_count.toString() },
+            { name: 'Comments', value: latestPost.comment_count.toString() },
+        )
+        .setImage(mediaUrl)
+        interaction.reply({embeds: [embed]})
     }
 }
