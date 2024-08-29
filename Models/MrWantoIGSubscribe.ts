@@ -2,10 +2,15 @@ import { Schema, model } from "mongoose";
 import { IMrWantoIGSubscribe } from "../Types";
 
 const MrWantoIGSubscribe = new Schema<IMrWantoIGSubscribe>({
-    lastPostCount: {type: Number},
-    lastPostId: {type: String},
-    subscriberChannelsIds: {type: [String]}
+    guildId: {type: String, required: true},
+    channelId: {type: String, required: true},
+    customMessage: {type: String},
+    lastPost: {
+        latestPostId: {type: String},
+        count: {type: Number}
+    }
 })
 
-const mrWantoIGSubscribe = model('MrWantoIGSubscribe', MrWantoIGSubscribe)
+const mrWantoDb = model('MrWantoIGSubscribe', MrWantoIGSubscribe)
 
+export default mrWantoDb

@@ -1,6 +1,8 @@
 import { schedule } from "node-cron"
 import { Client } from "discord.js"
 import Instagram from "../Utils/instagram";
+import mrWantoDb from "../Models/MrWantoIGSubscribe";
+import { IMrWantoIGSubscribe } from "../Types";
 
 declare module "instagram-private-api" {
     interface IgApiClient {
@@ -20,16 +22,15 @@ export default {
         client.instagram = new Instagram();
         const ig: Instagram = client.instagram
         await ig.login();
-        const mrWanto = await ig.user.search("mraihanaf")
-        ig.mrWantoId = mrWanto.users[0].pk
-
-        const post = await ig.getPosts(ig.mrWantoId)
-        console.log(post)
-        console.log(mrWanto)
+        const mrWanto = await ig.user.searchExact("wantoariwibowo")
+        ig.mrWantoId = mrWanto.pk
         schedule("*/5 * * * *", async() => {
             console.log("Checking Mr. Wanto Instagram")
             try {
-                const post = await ig.getPosts(ig.mrWantoId)
+                const latestPost = await ig.getLatestPost(ig.mrWantoId)
+                const subscribedServers: IMrWantoIGSubscribe[] = await mrWantoDb.find()
+                
+                
             } catch (err) {
                 // relogin
                 client.instagram = new Instagram()
