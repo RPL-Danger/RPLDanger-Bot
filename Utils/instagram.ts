@@ -1,5 +1,5 @@
 import { IgApiClient, UserFeed, UserFeedResponseItemsItem } from "instagram-private-api";
-import { IPostsInfo } from "../Types";
+import { IPostsInfo, ILatestPost } from "../Types";
 
 type HandlePostDelete = (deletedPostsCount: number) => void
 
@@ -19,23 +19,25 @@ export default class Instagram extends IgApiClient {
         return user.items()
     }
 
-    async getLatestPost(userid: number): Promise<UserFeedResponseItemsItem>{
+    async getLatestPost(userid: number): Promise<ILatestPost>{
         const posts: UserFeedResponseItemsItem[] = await this.getPosts(userid)
-        return posts[0]
+        return {
+            data: posts[0],
+            count: posts.length
+        }
     }
 
     
 
     async comparePost(oldPostsInfo: IPostsInfo, newPostsInfo: IPostsInfo, handlePostDelete: HandlePostDelete): Promise<UserFeedResponseItemsItem[] | null> {
-        if(oldPostsInfo == newPostsInfo) return null
+        if((oldPostsInfo.count == newPostsInfo.count) && (oldPostsInfo.latestPostId == newPostsInfo.latestPostId) && (oldPostsInfo.userInstaId == newPostsInfo.userInstaId)) return null
         if(oldPostsInfo.count > newPostsInfo.count){
-            const deletedPostsCount = oldPostsInfo.count - newPostsInfo.count
+            const deletedPostsCount: number = oldPostsInfo.count - newPostsInfo.count
             await handlePostDelete(deletedPostsCount)
             return null
         }
-        const newPosts: UserFeedResponseItemsItem[] = []
         const newPostsLength = newPostsInfo.count - oldPostsInfo.count
-        let latestPost = []
+        let latestPost: UserFeedResponseItemsItem[] = []
         const posts = await this.getPosts(newPostsInfo.userInstaId)
         for(let index = 0; index < newPostsLength; index++){
             latestPost.push(posts[index])    
