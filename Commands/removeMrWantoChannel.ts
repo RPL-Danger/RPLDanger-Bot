@@ -10,6 +10,6 @@ export default {
         if(!guild) return await interaction.reply(`Sorry, Server Belom Ada Di Database`)
         const channelId = guild.channelId
         await channels.deleteOne({guildId: interaction.guildId})
-        await interaction.reply(`Berhasil Menghapus Channel <#<${channelId}>`)
+        await interaction.reply(`Berhasil Menghapus Channel <#${channelId}>`)
     }   
 }
