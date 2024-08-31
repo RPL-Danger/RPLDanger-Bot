@@ -3,7 +3,7 @@ import channels from "../Models/MrWantoIGSubscribe";
 
 export default {
     data: new SlashCommandBuilder()
-          .setName("mrwantofetch")
+          .setName("mrwantotest")
           .setDescription("Test Announcement Mr Wanto")
           .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
     execute: async (interaction: ChatInputCommandInteraction) => {
