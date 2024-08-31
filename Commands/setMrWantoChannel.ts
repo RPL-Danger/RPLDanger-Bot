@@ -5,7 +5,7 @@ export default {
               .setName("setmrwantochannel")
               .setDescription("Set Mr Wanto Subscribe Channel.")
               .addChannelOption(option => option
-                .setName("subscribeChannel")
+                .setName("subscribe")
                 .setDescription("text channel")
                 .addChannelTypes(ChannelType.GuildText)
                 .setRequired(true)    
@@ -21,9 +21,9 @@ export default {
         if(guild) return await interaction.reply(`Sorry, Server Ini Sudah Ada Di Database. Silakan Hapus Terlebih Dahulu Menggunakan command /removeMrWantoChannel`)
         await channels.create({
             guildId: interaction.guildId,
-            channelId: interaction.options.getChannel('subscribeChannel')?.id,
+            channelId: interaction.options.getChannel('subscribe')?.id,
             customMessage: interaction.options.getString("custom-message") ? interaction.options.getString("custom-message") : "@everyone Ada Posts Baru Nih Dari Mr. Wanto!"
         })
-        await interaction.reply(`Berhasil. Sekarang Posts Baru Mr. Wanto Akan Di Umumkan Di #<${interaction.options.getChannel("subscribeChannel")?.id}>`)
+        await interaction.reply(`Berhasil. Sekarang Posts Baru Mr. Wanto Akan Di Umumkan Di #<${interaction.options.getChannel("subscribe")?.id}>`)
     }   
 }
