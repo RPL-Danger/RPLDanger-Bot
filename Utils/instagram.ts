@@ -49,5 +49,17 @@ export default class Instagram extends IgApiClient {
         return latestPost
     }
 
-
+    createEmbed(post: UserFeedResponseItemsItem): EmbedBuilder {
+        const postUrl: string = `https://instagram.com/p/${post.code}`
+        const mediaUrl = post.image_versions2.candidates[0].url
+        return new EmbedBuilder()
+            .setColor(0x0099FF)
+            .setDescription(post.caption?.text ? post.caption.text : "No Caption")
+            .setAuthor({name:post.user.username})
+            .addFields(
+                { name: 'Likes', value: post.like_count.toString() },
+                { name: 'Comments', value: post.comment_count.toString() },
+            )
+            .setImage(mediaUrl)
+    }
 }
