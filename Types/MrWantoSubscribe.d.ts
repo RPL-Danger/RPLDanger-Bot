@@ -7,7 +7,6 @@ export interface IPostsInfo {
 export interface IMrWantoIGSubscribe {
     guildId: string,
     channelId: string,
-    customMessage: string | null,
-    lastPost: IPostsInfo
+    customMessage: string | null
 }
 
