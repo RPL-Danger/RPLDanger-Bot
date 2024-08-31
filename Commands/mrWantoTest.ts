@@ -20,6 +20,7 @@ export default {
                 const embed = ig.createEmbed(post)
                 await channel.send({content: `${channelInfo.customMessage!}\n${postUrl}`, embeds: [embed]})
             }
+            await interaction.reply(`Sukses menjalankan test.`)
         }
     }
 }
