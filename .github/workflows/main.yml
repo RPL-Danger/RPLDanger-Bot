@@ -15,7 +15,11 @@ jobs:
       INSTAGRAM_USERNAME: ${{secrets.INSTAGRAM_USERNAME}}
       INSTAGRAM_PASSWORD: ${{secrets.INSTAGRAM_PASSWORD}}
     steps:
-    - run: "yarn install --immutable --immutable-cache --check-cache"
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Install Package
+      run: "yarn install --immutable --immutable-cache --check-cache"
     - run: "yarn run build"
-    - run: "pm2 restart rplbot --update-env"
+    - name: Deploy To Server
+      run: "pm2 restart rplbot --update-env"
     
