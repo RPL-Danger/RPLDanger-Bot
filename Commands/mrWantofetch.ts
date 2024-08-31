@@ -10,7 +10,6 @@ export default {
         const mediaUrl = latestPost.image_versions2.candidates[0].url
         const embed = new EmbedBuilder()
         .setColor(0x0099FF)
-        .setTitle(postUrl)
         .setDescription(latestPost.caption?.text ? latestPost.caption.text : "No Caption")
         .setAuthor({name:"@wantoariwibowo"})
         .addFields(
@@ -18,6 +17,6 @@ export default {
             { name: 'Comments', value: latestPost.comment_count.toString() },
         )
         .setImage(mediaUrl)
-        interaction.reply({embeds: [embed]})
+        interaction.reply({content: postUrl, embeds: [embed]})
     }
 }
