@@ -8,9 +8,6 @@ on: [push]
 jobs:
   build: 
     runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: [latest]
     env:
       TOKEN: ${{secrets.TOKEN}}
       CLIENT_ID: ${{secrets.CLIENT_ID}}
@@ -22,7 +19,6 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
         cache: 'yarn'
     - run: "yarn install --immutable --immutable-cache --check-cache"
     - run: "yarn run build"
