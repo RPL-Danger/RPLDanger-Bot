@@ -25,7 +25,7 @@ export default {
         const mrWanto = await ig.user.searchExact("wantoariwibowo")
         ig.mrWantoId = mrWanto.pk
         await check(client)
-        schedule("*/7 * * * *", async () => {
+        schedule("0 * * * *", async () => {
             const randomDuration: number = Math.floor(Math.random() * 1000*60*3)
             await setTimeout(async () => await check(client), randomDuration)
         })
@@ -34,7 +34,8 @@ export default {
 
 async function check(client: Client) {
     const ig = client.instagram
-    console.log("Checking Mr. Wanto Instagram")
+    const time = new Date();
+    console.log("Checking Mr. Wanto Instagram",`${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`)
     try {
         const latestPostData = await ig.getLatestPost(ig.mrWantoId)
         const latestPost: IPostsInfo = {
@@ -56,7 +57,7 @@ async function check(client: Client) {
         const newPosts = await ig.comparePost(oldPost!, latestPost, handlePostDelete) 
         if(newPosts) return console.log(`new post`, newPosts)
         console.log("No new posts from mr.wanto.")
-        oldPost = await update()
+        await update()
     } catch (err) {
         // relogin
         console.error(err)
