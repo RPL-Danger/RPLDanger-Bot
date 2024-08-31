@@ -2,7 +2,7 @@ import { SlashCommandBuilder, ChatInputCommandInteraction, ChannelType, Permissi
 import channels from "../Models/MrWantoIGSubscribe"
 export default {
     data: new SlashCommandBuilder()
-              .setName("setMrWantoChannel")
+              .setName("setmrwantochannel")
               .setDescription("Set Mr Wanto Subscribe Channel.")
               .addChannelOption(option => option
                 .setName("subscribeChannel")
