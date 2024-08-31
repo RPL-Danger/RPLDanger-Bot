@@ -24,6 +24,6 @@ export default {
             channelId: interaction.options.getChannel('subscribe')?.id,
             customMessage: interaction.options.getString("custom-message") ? interaction.options.getString("custom-message") : "@everyone Ada Posts Baru Nih Dari Mr. Wanto!"
         })
-        await interaction.reply(`Berhasil. Sekarang Posts Baru Mr. Wanto Akan Di Umumkan Di #<${interaction.options.getChannel("subscribe")?.id}>`)
+        await interaction.reply(`Berhasil. Sekarang Posts Baru Mr. Wanto Akan Di Umumkan Di <#${interaction.options.getChannel("subscribe")?.id}>`)
     }   
 }
