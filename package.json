@@ -19,7 +19,8 @@
     "typescript": "^5.5.4"
   },
   "scripts": {
-    "app": "tsc && node ./build",
-    "dev": "npx nodemon --exec \"npx tsc && node ./build\" --ext ts"
+    "app": "node ./build",
+    "dev": "npx nodemon --exec \"npx tsc && node ./build\" --ext ts",
+    "build": "tsc"
   }
 }
