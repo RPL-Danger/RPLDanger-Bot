@@ -6,11 +6,8 @@ name: "Build & Deploy Bot"
 #In this file we trigger pm2-configuration every we push code to repository.
 on: [push]
 jobs:
-  build: 
+  build-and-deploy: 
     runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: [latest]
     env:
       TOKEN: ${{secrets.TOKEN}}
       CLIENT_ID: ${{secrets.CLIENT_ID}}
@@ -18,12 +15,7 @@ jobs:
       INSTAGRAM_USERNAME: ${{secrets.INSTAGRAM_USERNAME}}
       INSTAGRAM_PASSWORD: ${{secrets.INSTAGRAM_PASSWORD}}
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
     - run: "yarn install --immutable --immutable-cache --check-cache"
     - run: "yarn run build"
+    - run: "pm2 restart rplbot --update-env"
     
