@@ -1,8 +1,9 @@
 import { schedule } from "node-cron"
-import { Client } from "discord.js"
+import { Channel, Client, TextChannel } from "discord.js"
 import Instagram from "../Utils/instagram";
 import MrWantoModel from "../Models/MrWantoIG";
 import { IPostsInfo } from "../Types";
+import channels from "../Models/MrWantoIGSubscribe";
 
 declare module "instagram-private-api" {
     interface IgApiClient {
@@ -55,8 +56,23 @@ async function check(client: Client) {
             return
         }
         const newPosts = await ig.comparePost(oldPost!, latestPost, handlePostDelete) 
-        if(newPosts) return console.log(`new post`, newPosts)
-        console.log("No new posts from mr.wanto.")
+        if(!newPosts){
+            console.log("No new posts from mr.wanto.")
+            return await update()
+        }
+        
+        console.log("new posts from mr.wanto")
+        const channelsArr = await channels.find({}).exec()
+        for(const channelInfo of channelsArr){
+            const guild = await client.guilds.cache.get(channelInfo.guildId)
+            const channel = await guild?.channels.cache.get(channelInfo.channelId) as TextChannel
+            for(const post of newPosts){
+                const postUrl: string = `https://instagram.com/p/${post.code}`
+                const embed = ig.createEmbed(post)
+                await channel.send({content: `${channelInfo.customMessage!}\n${postUrl}`, embeds: [embed]})
+            }
+        }
+
         await update()
     } catch (err) {
         // relogin
