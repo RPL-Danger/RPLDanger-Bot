@@ -6,12 +6,7 @@ name: "Build & Deploy Bot"
 #In this file we trigger pm2-configuration every we push code to repository.
 on: [push]
 jobs:
-  build: 
-    runs-on: self-hosted
-    steps:
-    - run: "yarn install --immutable --immutable-cache --check-cache"
-    - run: "yarn run build"
-  deploy:
+  build-and-deploy: 
     runs-on: self-hosted
     env:
       TOKEN: ${{secrets.TOKEN}}
@@ -20,5 +15,7 @@ jobs:
       INSTAGRAM_USERNAME: ${{secrets.INSTAGRAM_USERNAME}}
       INSTAGRAM_PASSWORD: ${{secrets.INSTAGRAM_PASSWORD}}
     steps:
-      - run: "pm2 restart rplbot --update-env"
+    - run: "yarn install --immutable --immutable-cache --check-cache"
+    - run: "yarn run build"
+    - run: "pm2 restart rplbot --update-env"
     
