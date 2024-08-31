@@ -20,5 +20,5 @@ jobs:
       INSTAGRAM_USERNAME: ${{secrets.INSTAGRAM_USERNAME}}
       INSTAGRAM_PASSWORD: ${{secrets.INSTAGRAM_PASSWORD}}
     steps:
-      - run: "pm2 restart rplbot"
+      - run: "pm2 restart rplbot --update-env"
     
