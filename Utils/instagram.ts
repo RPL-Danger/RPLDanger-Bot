@@ -16,7 +16,8 @@ export default class Instagram extends IgApiClient {
 
     async getPosts(userid: number | string): Promise<UserFeedResponseItemsItem[]>{
         const user: UserFeed = await this.feed.user(userid)
-        return user.items()
+        const posts = await user.items()
+        return posts
     }
 
     async getLatestPost(userid: number): Promise<ILatestPost>{
@@ -36,12 +37,14 @@ export default class Instagram extends IgApiClient {
             await handlePostDelete(deletedPostsCount)
             return null
         }
+        if(oldPostsInfo.count == newPostsInfo.count) return null
         const newPostsLength = newPostsInfo.count - oldPostsInfo.count
         let latestPost: UserFeedResponseItemsItem[] = []
         const posts = await this.getPosts(newPostsInfo.userInstaId)
         for(let index = 0; index < newPostsLength; index++){
             latestPost.push(posts[index])    
         }
+        
         return latestPost
     }
 }
