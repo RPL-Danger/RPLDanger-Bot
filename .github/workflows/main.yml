@@ -1,0 +1,29 @@
+
+#workflow name
+name: "Build & Deploy Bot"
+
+#event, trigger action that running our Jobs.
+#In this file we trigger pm2-configuration every we push code to repository.
+on: [push]
+jobs:
+  build: 
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: [latest]
+    env:
+      TOKEN: ${{secrets.TOKEN}}
+      CLIENT_ID: ${{secrets.CLIENT_ID}}
+      MONGODB_URI: ${{secrets.MONGODB_URI}}
+      INSTAGRAM_USERNAME: ${{secrets.INSTAGRAM_USERNAME}}
+      INSTAGRAM_PASSWORD: ${{secrets.INSTAGRAM_PASSWORD}}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+    - uses: action/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+    - run: "yarn install --immutable --immutable-cache --check-cache"
+    - run: "yarn build"
+    
