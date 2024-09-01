@@ -5,6 +5,5 @@ export default {
               .setDescription("Send a ping command!"),
     execute: async (interaction: ChatInputCommandInteraction) => {
         await interaction.reply("Pong!")
-        await interaction.followUp("Hey There!")
     }
 }
