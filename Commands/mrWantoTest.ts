@@ -11,8 +11,9 @@ export default {
         const client = interaction.client
         const ig = client.instagram
         for(const channelInfo of channelsArr){
-            const guild = await client.guilds.cache.get(channelInfo.guildId)
-            const channel = await guild?.channels.cache.get(channelInfo.channelId) as TextChannel
+            const guild = client.guilds.cache.get(channelInfo.guildId)
+            const channel = guild?.channels.cache.get(channelInfo.channelId) as TextChannel
+            if(!guild) continue
             const newPosts = await ig.getLatestPost(ig.mrWantoId)
             for(const latestPost of [newPosts]){
                 const post = latestPost.data
