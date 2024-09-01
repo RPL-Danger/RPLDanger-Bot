@@ -1,5 +1,5 @@
 import { schedule } from "node-cron"
-import { Channel, Client, TextChannel } from "discord.js"
+import { Client, TextChannel } from "discord.js"
 import Instagram from "../Utils/instagram";
 import MrWantoModel from "../Models/MrWantoIG";
 import { IPostsInfo } from "../Types";
@@ -28,7 +28,7 @@ export default {
         await check(client)
         schedule("0 * * * *", async () => {
             const randomDuration: number = Math.floor(Math.random() * 1000*60*3)
-            await setTimeout(async () => await check(client), randomDuration)
+            setTimeout(async () => await check(client), randomDuration)
         })
     }
 }

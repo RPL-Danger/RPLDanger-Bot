@@ -10,13 +10,13 @@ export default class Instagram extends IgApiClient {
 
     }
     async login(): Promise<void> {
-        await this.state.generateDevice(process.env.INSTAGRAM_USERNAME!)
+        this.state.generateDevice(process.env.INSTAGRAM_USERNAME!)
         await this.simulate.preLoginFlow()
         await this.account.login(process.env.INSTAGRAM_USERNAME!, process.env.INSTAGRAM_PASSWORD!)
     }
 
     async getPosts(userid: number | string): Promise<UserFeedResponseItemsItem[]>{
-        const user: UserFeed = await this.feed.user(userid)
+        const user: UserFeed = this.feed.user(userid)
         const posts = await user.items()
         return posts
     }
