@@ -25,7 +25,6 @@ export default {
         await ig.login();
         const mrWanto = await ig.user.searchExact("wantoariwibowo")
         ig.mrWantoId = mrWanto.pk
-        await check(client)
         schedule("0 * * * *", async () => {
             const randomDuration: number = Math.floor(Math.random() * 1000*60*3)
             setTimeout(async () => await check(client), randomDuration)
