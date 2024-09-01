@@ -65,6 +65,7 @@ async function check(client: Client) {
         for(const channelInfo of channelsArr){
             const guild = await client.guilds.cache.get(channelInfo.guildId)
             const channel = await guild?.channels.cache.get(channelInfo.channelId) as TextChannel
+            if(!guild) continue
             for(const post of newPosts){
                 const postUrl: string = `https://instagram.com/p/${post.code}`
                 const embed = ig.createEmbed(post)
