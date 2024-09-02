@@ -78,14 +78,13 @@ export default {
             result = `${targetUser} menang!`
         }
         if(initialUserChoice?.beats === targetUserChoice?.name) {
-            result = `${initialUserChoice} menang!`
+            result = `${interaction.user} menang!`
         }
         if(initialUserChoice?.name === targetUserChoice?.name) {
             result = `Game seri!`
         }
         embed.setDescription(
-            `${targetUser} pilih ${targetUserChoice?.name! + targetUserChoice?.emoji!}\n
-            ${interaction.user} pilih ${initialUserChoice?.name! + initialUserChoice?.emoji}
+            `${targetUser} pilih ${targetUserChoice?.name! + targetUserChoice?.emoji!}\n${interaction.user} pilih ${initialUserChoice?.name! + initialUserChoice?.emoji}
             \n\n${result}`
         )
         reply.edit({embeds: [embed], components: []})
