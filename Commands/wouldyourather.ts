@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, ButtonBuilder, ButtonStyle, APIActionRowComponent, APIButtonComponent, EmbedBuilder, ActionRowBuilder } from "discord.js";
-import WouldYouRatherModel from "../Models/wouldyourather";
+import WouldYouRatherModel from "../Models/WouldYouRather";
 import { IOption, IWouldYouRather } from "../Types";
 export default {
     data: new SlashCommandBuilder()

@@ -12,4 +12,5 @@ const WouldYouRatherSchema = new Schema<IWouldYouRather>({
 })
 
 const WouldYouRatherModel = model('wouldyourathers', WouldYouRatherSchema)
+
 export default WouldYouRatherModel
