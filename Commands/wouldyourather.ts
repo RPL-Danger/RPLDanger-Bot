@@ -66,6 +66,7 @@ export default {
             report.save()
             return await reply.edit({embeds: [embed], components: []})
         }
+        userInteraction.reply({content: `Kamu memilih Option ${parseInt(choiceId)+1} : ${genOptionValue(randomwyr?.options[parseInt(choiceId)]!)}`, ephemeral: true})
         const optionVotesTotal: number|undefined = randomwyr?.options.map(option => option.votes).reduce((total, value) => total + value)
         embed.setDescription(`${userInteraction.user} memilih Option ${parseInt(choiceId)+1} : ${genOptionValue(randomwyr?.options[parseInt(choiceId)]!)}\n\n${randomwyr?.options.map(option => `**${Math.round((option.votes/optionVotesTotal!)*100)}%** - ${genOptionValue(option)}`).join("\n")}`)
         const continueButton = new ButtonBuilder()
