@@ -34,7 +34,8 @@ export default {
         const row: APIActionRowComponent<APIButtonComponent> = new ActionRowBuilder<ButtonBuilder>()
             .addComponents(buttons!)
             .toJSON()
-        const gtStr = gtExpectedLength ? randomwyr?.options.map((opt, index) => `Option ${index+1}: ${genOptionValue(opt)}`).join("\n") : ""
+        // const gtStr = gtExpectedLength ? randomwyr?.options.map((opt, index) => `Option ${index+1}: ${genOptionValue(opt)}`).join("\n") : ""
+        const gtStr = randomwyr?.options.map((opt, index) => `Option ${index+1}: ${genOptionValue(opt)}`).join("\n")
         const embed = new EmbedBuilder()
             .setColor("Blue")
             .setTitle("Would You Rather?")
