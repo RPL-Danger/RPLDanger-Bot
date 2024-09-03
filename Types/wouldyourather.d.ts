@@ -8,3 +8,12 @@ export interface IOption {
     votes: number
 }
 
+export interface IReport {
+    wouldYouRatherId: string,
+    reported_by: IReportedBy
+}
+
+export interface IReportedBy {
+    username: string,
+    userid: string
+}
