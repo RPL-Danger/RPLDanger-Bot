@@ -6,11 +6,13 @@ export interface IEvent {
 }
 
 export interface ICommands {
+    enable: Boolean | undefined | null,
     data: SlashCommandBuilder,
     execute: Function
 }
 
 export interface IFeatures {
-    load: Function
+    load: Function,
+    enable: Boolean | undefined | null
 }
 

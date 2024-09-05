@@ -19,6 +19,7 @@ declare module "discord.js" {
 
 export default {
     /* Cek Instagram pak wanto setiap 5 menit */
+    enable: false,
     load: async (client: Client) => {
         client.instagram = new Instagram();
         const ig: Instagram = client.instagram

@@ -18,13 +18,17 @@ export async function registerCommands(client: Client){
     for(const file of cmdFiles){
         const filePath = join(cmdPath, file)
         const command: ICommands = (await import(filePath)).default
+        if(command?.enable === false){
+            console.log(`Command ${command.data.name} disabled.`)
+            continue
+        };
         client.commands.set(command.data.name, command)
         commands.push(command.data.toJSON())
     }
     // deploy commands
     const rest = new REST().setToken(process.env.TOKEN!)
     try {
-        console.log(`Started refreshing ${cmdFiles.length} application (/) commands.`);
+        console.log(`Started refreshing ${client.commands.size} application (/) commands.`);
         const data = await rest.put(
             Routes.applicationCommands(process.env.CLIENT_ID!),
             { body: commands }

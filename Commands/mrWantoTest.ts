@@ -1,7 +1,9 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits, TextChannel } from "discord.js";
 import channels from "../Models/MrWantoIGSubscribe";
+import mrWantoIgSubcribe from "../Features/mrWantoIgSubcribe"
 
 export default {
+    enable: mrWantoIgSubcribe.enable,
     data: new SlashCommandBuilder()
           .setName("mrwantotest")
           .setDescription("Test Announcement Mr Wanto")

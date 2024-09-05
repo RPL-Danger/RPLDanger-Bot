@@ -1,5 +1,8 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
+import mrWantoIgSubcribe from "../Features/mrWantoIgSubcribe"
+
 export default {
+    enable: mrWantoIgSubcribe.enable,
     data: new SlashCommandBuilder()
           .setName("mrwantofetch")
           .setDescription("Cek post terbaru Mr. Wanto")

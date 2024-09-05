@@ -10,6 +10,10 @@ export async function loadFeatures(client:Client): Promise<void> {
     for(const file of featFiles){
         const filePath: string = join(featPath, file)
         const loadFeat: IFeatures = (await import(filePath)).default
+        if(!loadFeat.enable){
+            console.log(`Feature ${file} disabled.`)
+            continue
+        }
         await loadFeat.load(client)
     }
 }
