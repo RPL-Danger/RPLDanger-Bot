@@ -2,7 +2,11 @@ import { SlashCommandBuilder, ChatInputCommandInteraction, ButtonBuilder, Button
 import { WouldYouRatherModel, ReportModel } from "../Models/WouldYouRather";
 import { IOption, IWouldYouRather } from "../Types";
 import { HydratedDocument } from "mongoose";
+import { enable as isMongoEnable } from "../Features/mongoDatabase";
+import { enable } from "../Features/mrWantoIgSubcribe";
+
 export default {
+    enable: isMongoEnable,
     data: new SlashCommandBuilder()
           .setName("wouldyourather")
           .setDescription("Would You Rather Game"),

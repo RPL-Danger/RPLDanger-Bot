@@ -1,9 +1,10 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, ChannelType, PermissionFlagsBits } from "discord.js"
 import channels from "../Models/MrWantoIGSubscribe"
-import mrWantoIgSubcribe from "../Features/mrWantoIgSubcribe"
+import { enable as isMrWantoEnable } from "../Features/mrWantoIgSubcribe"
+import { enable as isMongoEnable } from "../Features/mongoDatabase"
 
 export default {
-    enable: mrWantoIgSubcribe.enable,
+    enable: isMrWantoEnable && isMongoEnable,
     data: new SlashCommandBuilder()
               .setName("setmrwantochannel")
               .setDescription("Set Mr Wanto Subscribe Channel.")

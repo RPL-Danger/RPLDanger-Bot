@@ -1,8 +1,9 @@
 import { SlashCommandBuilder, ChatInputCommandInteraction, PermissionFlagsBits } from "discord.js";
-import mrWantoIgSubcribe from "../Features/mrWantoIgSubcribe"
+import { enable as isMrWantoEnable } from "../Features/mrWantoIgSubcribe"
+import { enable as isMongoEnable } from "../Features/mongoDatabase"
 
 export default {
-    enable: mrWantoIgSubcribe.enable,
+    enable: isMrWantoEnable && isMongoEnable,
     data: new SlashCommandBuilder()
           .setName("mrwantofetch")
           .setDescription("Cek post terbaru Mr. Wanto")
