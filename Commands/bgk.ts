@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, AutoModerationRuleKeywordPresetType, APIActionRowComponent, APIButtonComponent, EmbedAssertions } from "discord.js";
+import { SlashCommandBuilder, ChatInputCommandInteraction, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, APIActionRowComponent, APIButtonComponent } from "discord.js";
 
 const choices = [
     { name: "Batu", emoji: "🌑", beats: "Gunting" },
